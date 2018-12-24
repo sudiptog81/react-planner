@@ -17,7 +17,7 @@ const NavBar = props => {
         <Link
           to="/"
           className="brand-logo"
-          style={{ fontFamily: "Pacifico, cursive" }}
+          style={{ fontFamily: "Pacifico, cursive", fontSize: "1.5rem" }}
         >
           React Planner
         </Link>

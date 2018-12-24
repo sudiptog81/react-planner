@@ -12,8 +12,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-@media (max-width: 400px) {
-  .brand-logo {
+@media (max-width: 992px) {
+  a.brand-logo {
     font-size: 1.5rem;
   }
 }

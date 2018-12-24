@@ -1,0 +1,104 @@
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  font-family: sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (max-width: 400px) {
+  .brand-logo {
+    font-size: 1.5rem;
+  }
+}
+
+form {
+  padding: 1rem 0;
+  margin-top: 1rem;
+}
+
+form h5 {
+  margin: 2rem 0;
+}
+
+form button {
+  margin: 1rem 0;
+}
+
+input[type="text"]:not(.browser-default):focus:not([readonly]),
+input[type="email"]:not(.browser-default):focus:not([readonly]),
+input[type="password"]:not(.browser-default):focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]) {
+  border-color: black;
+  box-shadow: none;
+}
+
+input[type="text"]:not(.browser-default):focus:not([readonly]) + label,
+textarea.materialize-textarea:focus:not([readonly]) + label,
+input[type="email"]:not(.browser-default):focus:not([readonly]) + label,
+input[type="password"]:not(.browser-default):focus:not([readonly]) + label {
+  color: black !important;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.footer-text {
+  display: grid;
+  margin: 0 auto;
+  width: 100%;
+  grid-template-columns: 1fr 4fr 1fr;
+  grid-gap: 1rem;
+}
+
+.footer-text > div {
+  margin: auto 0;
+}
+
+.footer-text > div.copyright-text {
+  grid-column: 1;
+  display: table-cell;
+}
+
+.footer-text > div.spacer-text {
+  grid-column: 2;
+}
+
+.footer-text > div.social-links {
+  grid-column: 3;
+  text-align: end;
+}
+
+@media (max-width: 992px) {
+  .footer-text {
+    justify-content: center;
+    grid-template-columns: 1fr;
+  }
+  .footer-text > div.social-links {
+    text-align: center;
+    grid-column: 1;
+  }
+}
+
+#loader {
+  width: 100vw;
+  height: 100vh;
+  z-index: 10000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #ffffff;
+  padding: 40vh 40vw;
+  text-align: center;
+  vertical-align: middle;
+}

@@ -1,11 +1,12 @@
 const signIn = credentials => {
   return (dispatch, getState, { getFirebase }) => {
-    // async call to the database
     const firebase = getFirebase();
     firebase
       .auth()
       .signInWithEmailAndPassword(credentials.email, credentials.password)
       .then(() => {
+        let user = firebase.auth().currentUser;
+        if (user && !user.emailVerified) user.sendEmailVerification();
         dispatch({ type: "LOGIN_SUCCESS" });
       })
       .catch(err => {
@@ -32,13 +33,14 @@ export const signUp = newUser => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const firebase = getFirebase();
     const firestore = getFirestore();
+
     firebase
       .auth()
       .createUserWithEmailAndPassword(newUser.email, newUser.password)
-      .then(res => {
+      .then(resp => {
         return firestore
           .collection("users")
-          .doc(res.user.uid)
+          .doc(resp.user.uid)
           .set({
             firstName: newUser.firstName,
             lastName: newUser.lastName,

@@ -25,20 +25,3 @@ exports.projectCreated = functions.firestore
     };
     return createNotification(notification);
   });
-
-exports.userCreated = functions.auth.user().onCreate(user => {
-  return admin
-    .firestore()
-    .collection("users")
-    .doc(user.uid)
-    .get()
-    .then(doc => {
-      const newUser = doc.data();
-      const notification = {
-        content: "joined the team",
-        user: `${newUser.firstName} ${newUser.lastName}`,
-        time: admin.firestore.FieldValue.serverTimestamp()
-      };
-      return createNotification(notification);
-    });
-});

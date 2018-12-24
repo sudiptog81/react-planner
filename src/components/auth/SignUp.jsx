@@ -80,7 +80,7 @@ class SignUp extends Component {
               Already Registered?
             </Link>
             <div className="red-text center">
-              {authError ? <p>{authError}</p> : null}
+              {authError ? <p>&nbsp;&nbsp;{authError}</p> : null}
             </div>
           </div>
         </form>

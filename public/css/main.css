@@ -83,7 +83,7 @@ footer {
     grid-column: 1;
   }
   footer {
-    position: unset;
+    display: none;
   }
   form {
     padding: 0;

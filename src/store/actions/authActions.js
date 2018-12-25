@@ -48,6 +48,8 @@ export const signUp = newUser => {
           });
       })
       .then(() => {
+        let user = firebase.auth().currentUser;
+        if (user && !user.emailVerified) user.sendEmailVerification();
         dispatch({ type: "SIGNUP_SUCCESS" });
       })
       .catch(err => {

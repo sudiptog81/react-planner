@@ -20,7 +20,7 @@ const Footer = () => {
               <i className="fab fa-twitter grey-text text-darken-3 fa-xs" />
             </a>
             <a
-              href="http://github.com/sudiptog81"
+              href="https://github.com/sudiptog81"
               className="btn white darken-3 text-darken-3 btn-floating btn-small btn-flat"
             >
               <i className="fab fa-github grey-text text-darken-3 fa-sm" />

@@ -25,3 +25,27 @@ exports.projectCreated = functions.firestore
     };
     return createNotification(notification);
   });
+
+exports.userDocCreated = functions.firestore
+  .document("users/{userId}")
+  .onCreate(doc => {
+    const userDoc = doc.data();
+    const notification = {
+      content: "joined the team",
+      user: `${userDoc.firstName} ${userDoc.lastName}`,
+      time: admin.firestore.FieldValue.serverTimestamp()
+    };
+    return createNotification(notification);
+  });
+
+exports.userCreated = functions.auth.user().onCreate(user => {
+  return admin
+    .firestore()
+    .collection("users")
+    .doc(user.uid)
+    .get()
+    .then(doc => {
+      const newUser = doc.data();
+      console.log(newUser);
+    });
+});

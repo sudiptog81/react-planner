@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import signIn from "../../store/actions/authActions";
 import { Link, Redirect } from "react-router-dom";
+import ReactGA from "react-ga";
 
 class SignIn extends Component {
   state = {
@@ -18,6 +19,7 @@ class SignIn extends Component {
     });
   };
   render() {
+    ReactGA.pageview("/signin");
     const { authError, auth } = this.props;
     if (auth.uid) return <Redirect to="/" />;
     return (

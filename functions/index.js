@@ -26,6 +26,32 @@ exports.projectCreated = functions.firestore
     return createNotification(notification);
   });
 
+exports.projectDeleted = functions.firestore
+  .document("projects/{projectId}")
+  .onDelete((snap, context) => {
+    const prevDoc = snap.data();
+    console.log(prevDoc);
+    const notification = {
+      content: "deleted a post",
+      user: `${prevDoc.authorFirstName} ${prevDoc.authorLastName}`,
+      time: admin.firestore.FieldValue.serverTimestamp()
+    };
+    return createNotification(notification);
+  });
+
+exports.projectDeleted = functions.firestore
+  .document("projects/{projectId}")
+  .onUpdate((change, context) => {
+    const newDoc = change.after.data();
+    console.log(newDoc);
+    const notification = {
+      content: "edited a post",
+      user: `${newDoc.authorFirstName} ${newDoc.authorLastName}`,
+      time: admin.firestore.FieldValue.serverTimestamp()
+    };
+    return createNotification(notification);
+  });
+
 exports.userDocCreated = functions.firestore
   .document("users/{userId}")
   .onCreate(doc => {

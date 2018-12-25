@@ -9,6 +9,7 @@ import { reactReduxFirebase, getFirebase } from "react-redux-firebase";
 import { reduxFirestore, getFirestore } from "redux-firestore";
 import rootReducer from "./store/reducers/rootReducer";
 import firebase from "./config/firebase";
+import ReactGA from "react-ga";
 
 const store = createStore(
   rootReducer,
@@ -24,6 +25,7 @@ const store = createStore(
 );
 
 store.firebaseAuthIsReady.then(() => {
+  ReactGA.initialize("UA-53663434-11");
   ReactDOM.render(
     <Provider store={store}>
       <App />

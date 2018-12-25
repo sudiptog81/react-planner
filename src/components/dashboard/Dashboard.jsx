@@ -5,11 +5,12 @@ import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import { Redirect } from "react-router-dom";
-// import { Link } from "react-router-dom";
+import ReactGA from "react-ga";
 
 class Dashboard extends Component {
   state = {};
   render() {
+    ReactGA.pageview("/");
     const { projects, auth, notifications } = this.props;
     if (!auth.uid) return <Redirect to="/signin" />;
     return (
@@ -20,11 +21,6 @@ class Dashboard extends Component {
           </div>
           <div className="col s12 m4">
             <Notifications notifications={notifications} />
-            {/* <div class="fixed-action-btn">
-              <Link to="/create" class="btn-floating btn-large blue darken-3">
-                <i class="large material-icons">mode_edit</i>
-              </Link>
-            </div> */}
           </div>
         </div>
       </div>

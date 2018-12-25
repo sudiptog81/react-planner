@@ -8,6 +8,7 @@ import SignUp from "./components/auth/SignUp";
 import CreateProject from "./components/project/CreateProject";
 import Footer from "./components/layout/Footer";
 import Error404 from "./components/error/Error404";
+import EditProject from "./components/project/EditProject";
 
 class App extends Component {
   componentDidMount() {
@@ -23,10 +24,11 @@ class App extends Component {
           <NavBar />
           <Switch>
             <Route exact path="/" component={Dashboard} />
-            <Route path="/project/:id" component={ProjectDetails} />
             <Route path="/signin" component={SignIn} />
             <Route path="/signup" component={SignUp} />
             <Route path="/create" component={CreateProject} />
+            <Route path="/project/:id" component={ProjectDetails} />
+            <Route path="/edit/:id" component={EditProject} />
             <Route component={Error404} />
           </Switch>
           <Footer />

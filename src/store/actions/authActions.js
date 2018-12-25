@@ -1,3 +1,4 @@
+import ReactGA from "react-ga";
 const signIn = credentials => {
   return (dispatch, getState, { getFirebase }) => {
     const firebase = getFirebase();
@@ -5,6 +6,10 @@ const signIn = credentials => {
       .auth()
       .signInWithEmailAndPassword(credentials.email, credentials.password)
       .then(() => {
+        ReactGA.event({
+          category: "User",
+          action: "Signed In"
+        });
         let user = firebase.auth().currentUser;
         if (user && !user.emailVerified) user.sendEmailVerification();
         dispatch({ type: "LOGIN_SUCCESS" });
@@ -19,6 +24,10 @@ export default signIn;
 
 export const signOut = () => {
   return (dispatch, getState, { getFirebase }) => {
+    ReactGA.event({
+      category: "User",
+      action: "Signed Out"
+    });
     const firebase = getFirebase();
     firebase
       .auth()
@@ -48,6 +57,10 @@ export const signUp = newUser => {
           });
       })
       .then(() => {
+        ReactGA.event({
+          category: "User",
+          action: "Signed Up"
+        });
         let user = firebase.auth().currentUser;
         if (user && !user.emailVerified) user.sendEmailVerification();
         dispatch({ type: "SIGNUP_SUCCESS" });

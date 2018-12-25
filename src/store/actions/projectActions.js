@@ -22,4 +22,39 @@ const createProject = project => {
   };
 };
 
+export const deleteProject = docId => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    // async call to the database
+    const firestore = getFirestore();
+    firestore
+      .collection("projects")
+      .doc(docId)
+      .delete()
+      .then(() => {
+        dispatch({ type: "DELETE_PROJECT", docId });
+      })
+      .catch(err => {
+        dispatch({ type: "DELETE_PROJECT_ERROR", err });
+      });
+  };
+};
+
+export const editProject = (docId, project) => {
+  return (dispatch, getState, { getFirebase, getFirestore }) => {
+    // async call to the database
+    const firestore = getFirestore();
+    firestore
+      .collection("projects")
+      .doc(docId)
+      .update(project)
+      .then(() => {
+        dispatch({ type: "EDIT_PROJECT", docId });
+      })
+      .catch(err => {
+        dispatch({ type: "EDIT_PROJECT_ERROR", err });
+      });
+    console.log("edited project", docId, project);
+  };
+};
+
 export default createProject;

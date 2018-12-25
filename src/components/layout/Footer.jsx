@@ -1,7 +1,11 @@
 import React from "react";
 const Footer = () => {
   return (
-    <footer className="page-footer white" style={{ padding: "0" }}>
+    <footer
+      className="page-footer white"
+      id="main-footer"
+      style={{ padding: "0" }}
+    >
       <div
         className="footer-copyright grey darken-3"
         style={{ padding: "0 1rem" }}

@@ -3,12 +3,12 @@ import "firebase/firestore";
 import "firebase/auth";
 
 const config = {
-  apiKey: "AIzaSyAv1ftqC9wPDiJ1Q9--PBXxVaK1WbS1mRk",
-  authDomain: "sudipto-marioplan.firebaseapp.com",
-  databaseURL: "https://sudipto-marioplan.firebaseio.com",
-  projectId: "sudipto-marioplan",
-  storageBucket: "sudipto-marioplan.appspot.com",
-  messagingSenderId: "831995399787"
+  apiKey: "xxxx",
+  authDomain: "xxx.firebaseapp.com",
+  databaseURL: "https://xxxx.firebaseio.com",
+  projectId: "xxx",
+  storageBucket: "xxx.appspot.com",
+  messagingSenderId: "xxx"
 };
 
 firebase.initializeApp(config);

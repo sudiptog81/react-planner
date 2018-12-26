@@ -5,12 +5,10 @@ import ReactGA from "react-ga";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { editProject } from "../../store/actions/projectActions";
+import M from "materialize-css";
 
 class EditProject extends Component {
-  state = {
-    title: "",
-    content: ""
-  };
+  state = {};
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
@@ -24,12 +22,17 @@ class EditProject extends Component {
       action: "Edited Project"
     });
     this.props.history.push("/");
+    M.toast({ html: "Post edited" });
   };
+  componentDidMount() {
+    M.updateTextFields();
+  }
   render(props) {
     const { project, auth } = this.props;
     ReactGA.pageview(`/edit/${this.props.match.params.id}`);
     if (!auth.uid) return <Redirect to="/signin" />;
     if (project) {
+      if (!(auth.uid === project.authorId)) return <Redirect to="/" />;
       return (
         <div className="container section">
           <form onSubmit={this.handleSubmit} className="white">
@@ -41,6 +44,7 @@ class EditProject extends Component {
                 name="title"
                 id="title"
                 defaultValue={project.title}
+                className="validate"
                 onClick={this.handleChange}
                 onChange={this.handleChange}
               />
@@ -52,7 +56,8 @@ class EditProject extends Component {
                 id="content"
                 cols="30"
                 rows="10"
-                className="materialize-textarea"
+                className="materialize-textarea validate"
+                style={{ height: "15rem", overflowY: "scroll" }}
                 defaultValue={project.content}
                 onClick={this.handleChange}
                 onChange={this.handleChange}

@@ -39,7 +39,7 @@ exports.projectDeleted = functions.firestore
     return createNotification(notification);
   });
 
-exports.projectDeleted = functions.firestore
+exports.projectEdited = functions.firestore
   .document("projects/{projectId}")
   .onUpdate((change, context) => {
     const newDoc = change.after.data();
@@ -75,3 +75,27 @@ exports.userCreated = functions.auth.user().onCreate(user => {
       console.log(newUser);
     });
 });
+
+exports.userDeleted = functions.auth.user().onDelete(user => {
+  return admin
+    .firestore()
+    .collection("users")
+    .doc(user.uid)
+    .delete()
+    .then(doc => {
+      console.log(`User ${user.displayName} deleted`);
+    });
+});
+
+exports.userDocDeleted = functions.firestore
+  .document("users/{userId}")
+  .onDelete((snap, context) => {
+    const userDoc = snap.data();
+    console.log(userDoc);
+    const notification = {
+      content: "left the team",
+      user: `${userDoc.firstName} ${userDoc.lastName}`,
+      time: admin.firestore.FieldValue.serverTimestamp()
+    };
+    return createNotification(notification);
+  });

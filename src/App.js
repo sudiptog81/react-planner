@@ -6,9 +6,10 @@ import ProjectDetails from "./components/project/ProjectDetails";
 import SignIn from "./components/auth/SignIn";
 import SignUp from "./components/auth/SignUp";
 import CreateProject from "./components/project/CreateProject";
-import Footer from "./components/layout/Footer";
 import Error404 from "./components/error/Error404";
 import EditProject from "./components/project/EditProject";
+import Help from "./components/help/Help";
+import UserProfile from "./components/user/UserProfile";
 
 class App extends Component {
   componentDidMount() {
@@ -24,14 +25,15 @@ class App extends Component {
           <NavBar />
           <Switch>
             <Route exact path="/" component={Dashboard} />
+            <Route path="/help" component={Help} />
             <Route path="/signin" component={SignIn} />
             <Route path="/signup" component={SignUp} />
+            <Route path="/user" component={UserProfile} />
             <Route path="/create" component={CreateProject} />
-            <Route path="/project/:id" component={ProjectDetails} />
+            <Route path="/view/:id" component={ProjectDetails} />
             <Route path="/edit/:id" component={EditProject} />
             <Route component={Error404} />
           </Switch>
-          <Footer />
         </div>
       </BrowserRouter>
     );

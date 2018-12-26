@@ -5,7 +5,7 @@ const Error404 = () => {
     <div className="container section center">
       <h1 className="text-center">404</h1>
       <h3>PAGE NOT FOUND</h3>
-      <p>THE PAGE YOU REQUESTED COULD NOT BE FOUND</p>
+      <p className="center">THE PAGE YOU REQUESTED COULD NOT BE FOUND</p>
     </div>
   );
 };

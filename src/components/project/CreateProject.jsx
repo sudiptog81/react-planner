@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import createProject from "../../store/actions/projectActions";
 import { Redirect } from "react-router-dom";
 import ReactGA from "react-ga";
+import M from "materialize-css";
 
 class CreateProject extends Component {
   state = {
@@ -13,10 +14,7 @@ class CreateProject extends Component {
     e.preventDefault();
     this.props.createProject(this.state);
     this.props.history.push("/");
-    ReactGA.event({
-      category: "User",
-      action: "Created Project"
-    });
+    M.toast({ html: "Post added" });
   };
   handleChange = e => {
     this.setState({
@@ -48,6 +46,7 @@ class CreateProject extends Component {
               cols="30"
               rows="10"
               className="materialize-textarea"
+              style={{ height: "15rem", overflowY: "scroll" }}
               onChange={this.handleChange}
             />
           </div>

@@ -11,7 +11,12 @@ const signIn = credentials => {
           action: "Signed In"
         });
         let user = firebase.auth().currentUser;
-        if (user && !user.emailVerified) user.sendEmailVerification();
+        if (user && !user.emailVerified) {
+          user.sendEmailVerification();
+          alert(
+            "Verify your email by clicking on the link sent to your email address!"
+          );
+        }
         dispatch({ type: "LOGIN_SUCCESS" });
       })
       .catch(err => {
@@ -68,5 +73,42 @@ export const signUp = newUser => {
       .catch(err => {
         dispatch({ type: "SIGNUP_ERROR", err });
       });
+  };
+};
+
+export const forgotPassword = user => {
+  return (dispatch, getState, { getFirebase }) => {
+    const firebase = getFirebase();
+    firebase
+      .auth()
+      .sendPasswordResetEmail(user)
+      .then(() => {
+        dispatch({ type: "RESET_SUCCESS" });
+      })
+      .catch(err => {
+        dispatch({ type: "RESET_ERROR", err });
+      });
+  };
+};
+
+export const deleteAccount = (user, creds) => {
+  return (dispatch, getState, { getFirebase }) => {
+    const firebase = getFirebase();
+    var userAuth = firebase.auth().currentUser;
+    var credentials = firebase.auth.EmailAuthProvider.credential(
+      userAuth.email,
+      creds.password
+    );
+    userAuth
+      .reauthenticateAndRetrieveDataWithCredential(credentials)
+      .then(() => {
+        console.log("Reauthenticated");
+        userAuth.delete();
+      })
+      .then(() => {
+        console.log("Deleted", userAuth.email);
+        dispatch({ type: "DELETEAC_SUCCESS" });
+      })
+      .catch(err => dispatch({ type: "DELETEAC_ERROR", err }));
   };
 };

@@ -73,6 +73,11 @@ footer {
   text-align: end;
 }
 
+.user-circle {
+  left: 1.5rem;
+  top: 3.15rem;
+}
+
 @media (max-width: 992px) {
   .footer-text {
     justify-content: center;
@@ -88,6 +93,15 @@ footer {
   form {
     padding: 0;
   }
+  .user-circle {
+    left: 1.8rem;
+    top: 3.25rem;
+  }
+}
+
+.pplist > li {
+  list-style-type: disc !important;
+  margin-left: 1em;
 }
 
 #loader {
@@ -101,4 +115,14 @@ footer {
   padding: 40vh 40vw;
   text-align: center;
   vertical-align: middle;
+}
+
+@media (max-width: 339px) {
+  .extra {
+    display: none;
+  }
+}
+
+p {
+  text-align: justify;
 }

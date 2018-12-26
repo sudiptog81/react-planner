@@ -18,19 +18,42 @@ const ProjectDetails = props => {
     const editPost = () => {
       if (auth.uid === project.authorId) {
         return (
-          <div className="" style={{ marginTop: "1rem" }}>
+          <div className="" style={{ marginTop: "1rem", position: "relative" }}>
             <Link
               to={`/edit/${props.match.params.id}`}
-              className="btn waves-effect waves-light btn-floating blue darken-1"
+              className="btn waves-effect waves-light btn-floating blue darken-1 left-align"
+              style={{
+                position: "relative",
+                left: "0",
+                margin: "auto 0"
+              }}
             >
               <i
                 className="fas fa-pencil-alt fa-xs"
                 style={{ fontSize: "1rem" }}
               />{" "}
             </Link>
+            <span
+              className="red-text text-darken-1"
+              style={{
+                margin: "auto 0",
+                marginRight: "1rem",
+                position: "absolute",
+                right: "2.3em",
+                top: ".75rem"
+              }}
+            >
+              DANGER
+            </span>
             <button
               className="btn waves-effect waves-light btn-floating red darken-1"
-              style={{ marginLeft: "1rem" }}
+              style={{
+                margin: "auto 0",
+                marginLeft: "1rem",
+                position: "absolute",
+                right: "0",
+                top: ".07rem"
+              }}
               onClick={() => {
                 deletePost();
               }}
@@ -40,7 +63,7 @@ const ProjectDetails = props => {
           </div>
         );
       } else {
-        console.log(auth.id, project.authorId);
+        console.log(auth.uid, project.authorId);
         return null;
       }
     };

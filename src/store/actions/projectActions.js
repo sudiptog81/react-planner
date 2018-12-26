@@ -1,3 +1,4 @@
+import ReactGA from "react-ga";
 const createProject = project => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     // async call to the database
@@ -15,6 +16,10 @@ const createProject = project => {
       })
       .then(() => {
         dispatch({ type: "CREATE_PROJECT", project });
+        ReactGA.event({
+          category: "Post",
+          action: "Created Post"
+        });
       })
       .catch(err => {
         dispatch({ type: "CREATE_PROJECT_ERROR", err });
@@ -32,6 +37,10 @@ export const deleteProject = docId => {
       .delete()
       .then(() => {
         dispatch({ type: "DELETE_PROJECT", docId });
+        ReactGA.event({
+          category: "Post",
+          action: "Deleted Post"
+        });
       })
       .catch(err => {
         dispatch({ type: "DELETE_PROJECT_ERROR", err });
@@ -49,11 +58,14 @@ export const editProject = (docId, project) => {
       .update(project)
       .then(() => {
         dispatch({ type: "EDIT_PROJECT", docId });
+        ReactGA.event({
+          category: "Post",
+          action: "Edited Post"
+        });
       })
       .catch(err => {
         dispatch({ type: "EDIT_PROJECT_ERROR", err });
       });
-    console.log("edited project", docId, project);
   };
 };
 

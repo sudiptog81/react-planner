@@ -15,14 +15,13 @@ const signIn = credentials => {
         let user = firebase.auth().currentUser;
         if (user && !user.emailVerified) {
           user.sendEmailVerification();
-          alert(
-            "Verify your email by clicking on the link sent to your email address!"
-          );
+          M.toast({ html: "Verification email sent" });
         }
         dispatch({ type: "LOGIN_SUCCESS" });
       })
       .catch(err => {
         dispatch({ type: "LOGIN_ERROR", err });
+        M.toast({ html: `${err}` });
       });
   };
 };

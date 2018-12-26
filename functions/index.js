@@ -39,7 +39,7 @@ exports.projectDeleted = functions.firestore
     return createNotification(notification);
   });
 
-exports.projectDeleted = functions.firestore
+exports.projectEdited = functions.firestore
   .document("projects/{projectId}")
   .onUpdate((change, context) => {
     const newDoc = change.after.data();

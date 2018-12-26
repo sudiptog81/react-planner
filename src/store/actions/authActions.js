@@ -1,4 +1,6 @@
 import ReactGA from "react-ga";
+import M from "materialize-css";
+
 const signIn = credentials => {
   return (dispatch, getState, { getFirebase }) => {
     const firebase = getFirebase();
@@ -69,9 +71,11 @@ export const signUp = newUser => {
         let user = firebase.auth().currentUser;
         if (user && !user.emailVerified) user.sendEmailVerification();
         dispatch({ type: "SIGNUP_SUCCESS" });
+        M.toast({ html: "Verification email sent" });
       })
       .catch(err => {
         dispatch({ type: "SIGNUP_ERROR", err });
+        M.toast({ html: `${err}` });
       });
   };
 };

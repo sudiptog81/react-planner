@@ -3,7 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { signUp } from "../../store/actions/authActions";
 import ReactGA from "react-ga";
-import M from "materialize-css";
+// import M from "materialize-css";
 
 class SignUp extends Component {
   state = {
@@ -15,7 +15,6 @@ class SignUp extends Component {
   handleSubmit = e => {
     e.preventDefault();
     this.props.signUp(this.state);
-    M.toast({ html: "Verification email sent" });
   };
   handleChange = e => {
     this.setState({

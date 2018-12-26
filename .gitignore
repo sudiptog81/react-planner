@@ -28,3 +28,4 @@ yarn-error.log*
 firebase.json
 **/firebase.js
 /src/config/firebase.js
+**/firebase.js

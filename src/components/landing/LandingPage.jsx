@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import M from "materialize-css";
 import { NavLink } from "react-router-dom";
+import ReactGA from "react-ga";
 
 class LandingPage extends Component {
   componentDidMount() {
@@ -8,6 +9,7 @@ class LandingPage extends Component {
     M.Parallax.init(elems);
   }
   render() {
+    ReactGA.pageview("/");
     return (
       <React.Fragment>
         <div

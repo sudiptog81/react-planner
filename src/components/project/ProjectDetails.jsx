@@ -13,7 +13,7 @@ const ProjectDetails = props => {
     const deletePost = () => {
       const docId = props.match.params.id;
       props.deleteProject(docId);
-      return <Redirect to="/" />;
+      return <Redirect to="/dashboard" />;
     };
     const editPost = () => {
       if (auth.uid === project.authorId) {

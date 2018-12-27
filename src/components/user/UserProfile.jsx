@@ -31,7 +31,7 @@ class UserProfile extends Component {
   render() {
     const { auth, profile, authError } = this.props;
     if (authError) console.log(authError);
-    if (!auth.uid) return <Redirect to="/signin" />;
+    if (!auth.uid) return <Redirect to="/" />;
     return (
       <div className="container center section">
         <div className="row">

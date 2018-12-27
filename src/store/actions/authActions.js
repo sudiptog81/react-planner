@@ -135,10 +135,23 @@ export const forgotPassword = user => {
       })
       .catch(err => {
         dispatch({ type: "RESET_ERROR", err });
-        M.toast({
-          html: "Password Reset email not sent",
-          classes: "red darken-1"
-        });
+        switch (err.code) {
+          case "auth/invalid-email":
+            M.toast({ html: "Invalid email", classes: "red darken-1" });
+            break;
+          case "auth/user-not-found":
+            M.toast({
+              html: "Account not found",
+              classes: "red darken-1"
+            });
+            break;
+          default:
+            M.toast({
+              html: "Password Reset email not sent",
+              classes: "red darken-1"
+            });
+            break;
+        }
       });
   };
 };

@@ -13,7 +13,7 @@ class CreateProject extends Component {
   handleSubmit = e => {
     e.preventDefault();
     this.props.createProject(this.state);
-    this.props.history.push("/");
+    this.props.history.push("/dashboard");
     M.toast({ html: "Post added" });
   };
   handleChange = e => {

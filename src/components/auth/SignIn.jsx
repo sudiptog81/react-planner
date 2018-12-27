@@ -36,7 +36,7 @@ class SignIn extends Component {
     ReactGA.pageview("/signin");
     const { authError, auth } = this.props;
     if (authError) console.log(authError);
-    if (auth.uid) return <Redirect to="/" />;
+    if (auth.uid) return <Redirect to="/dashboard" />;
     return (
       <div className="container section">
         <form onSubmit={this.handleSubmit} className="white">
@@ -64,7 +64,7 @@ class SignIn extends Component {
             />
             <span>
               <Link
-                to="/"
+                to="/signin"
                 className="grey-text text-darken-3"
                 onClick={this.handleForgotPassword}
               >

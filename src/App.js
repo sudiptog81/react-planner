@@ -10,6 +10,7 @@ import Error404 from "./components/error/Error404";
 import EditProject from "./components/project/EditProject";
 import Help from "./components/help/Help";
 import UserProfile from "./components/user/UserProfile";
+import LandingPage from "./components/landing/LandingPage";
 
 class App extends Component {
   componentDidMount() {
@@ -24,7 +25,8 @@ class App extends Component {
         <div className="App">
           <NavBar />
           <Switch>
-            <Route exact path="/" component={Dashboard} />
+            <Route exact path="/" component={LandingPage} />
+            <Route path="/dashboard" component={Dashboard} />
             <Route path="/help" component={Help} />
             <Route path="/signin" component={SignIn} />
             <Route path="/signup" component={SignUp} />

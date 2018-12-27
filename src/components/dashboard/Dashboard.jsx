@@ -10,9 +10,9 @@ import ReactGA from "react-ga";
 class Dashboard extends Component {
   state = {};
   render() {
-    ReactGA.pageview("/");
+    ReactGA.pageview("/dashboard");
     const { projects, auth, notifications } = this.props;
-    if (!auth.uid) return <Redirect to="/signin" />;
+    if (!auth.uid) return <Redirect to="/" />;
     return (
       <div className="dashboard section container">
         <div className="row">

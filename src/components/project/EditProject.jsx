@@ -21,7 +21,7 @@ class EditProject extends Component {
       category: "User",
       action: "Edited Project"
     });
-    this.props.history.push("/");
+    this.props.history.push("/dashboard");
     M.toast({ html: "Post edited" });
   };
   componentDidMount() {
@@ -32,7 +32,7 @@ class EditProject extends Component {
     ReactGA.pageview(`/edit/${this.props.match.params.id}`);
     if (!auth.uid) return <Redirect to="/signin" />;
     if (project) {
-      if (!(auth.uid === project.authorId)) return <Redirect to="/" />;
+      if (!(auth.uid === project.authorId)) return <Redirect to="/dashboard" />;
       return (
         <div className="container section">
           <form onSubmit={this.handleSubmit} className="white">

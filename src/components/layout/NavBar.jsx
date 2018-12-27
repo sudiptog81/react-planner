@@ -14,13 +14,24 @@ const NavBar = props => {
   return (
     <nav className="nav-wrapper grey darken-3">
       <div style={{ margin: "0 1rem" }}>
-        <Link
-          to="/"
-          className="brand-logo"
-          style={{ fontFamily: "Pacifico, cursive", fontSize: "1.5rem" }}
-        >
-          React Planner
-        </Link>
+        {auth.uid ? (
+          <Link
+            to="/dashboard"
+            className="brand-logo"
+            style={{ fontFamily: "Pacifico, cursive", fontSize: "1.5rem" }}
+          >
+            {" "}
+            React Planner
+          </Link>
+        ) : (
+          <Link
+            to="/"
+            className="brand-logo"
+            style={{ fontFamily: "Pacifico, cursive", fontSize: "1.5rem" }}
+          >
+            React Planner{" "}
+          </Link>
+        )}
         {links}
       </div>
     </nav>

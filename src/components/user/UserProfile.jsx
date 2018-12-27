@@ -8,8 +8,7 @@ class UserProfile extends Component {
   state = {};
   componentDidMount() {
     var elems = document.querySelectorAll(".modal");
-    // eslint-disable-next-line no-unused-vars
-    var instances = M.Modal.init(elems, null);
+    M.Modal.init(elems, null);
   }
   handleResetPassword = () => {
     const user = this.props.auth.email;

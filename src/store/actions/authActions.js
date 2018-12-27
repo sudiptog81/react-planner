@@ -18,6 +18,9 @@ const signIn = credentials => {
           M.toast({ html: "Verification email sent" });
         }
         dispatch({ type: "LOGIN_SUCCESS" });
+        M.toast({
+          html: "Signed in successfully"
+        });
       })
       .catch(err => {
         dispatch({ type: "LOGIN_ERROR", err });
@@ -60,6 +63,9 @@ export const signOut = () => {
       .signOut()
       .then(() => {
         dispatch({ type: "SIGNOUT_SUCCESS" });
+        M.toast({
+          html: "Signed out successfully"
+        });
       });
   };
 };

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import M from "materialize-css";
 import { NavLink } from "react-router-dom";
 import ReactGA from "react-ga";
+import { connect } from "react-redux";
 
 class LandingPage extends Component {
   componentDidMount() {
@@ -10,6 +11,7 @@ class LandingPage extends Component {
   }
   render() {
     ReactGA.pageview("/");
+    const { auth, profile } = this.props;
     return (
       <React.Fragment>
         <div
@@ -40,24 +42,35 @@ class LandingPage extends Component {
                   a modern open-source companion for planning the next big thing
                 </h5>
               </div>
-              <div className="row center">
-                <NavLink
-                  to="/signin"
-                  id="download-button"
-                  className="btn-large waves-effect white grey-text text-darken-3"
-                  style={{ width: "8.75rem" }}
-                >
-                  <strong style={{ fontWeight: "600" }}>Sign In</strong>
-                </NavLink>
-                <NavLink
-                  to="/signup"
-                  id="download-button"
-                  className="btn-large waves-effect white grey-text text-darken-3"
-                  style={{ marginLeft: "1rem", width: "8.75rem" }}
-                >
-                  <strong style={{ fontWeight: "600" }}>Sign Up</strong>
-                </NavLink>
-              </div>
+              {auth.uid ? (
+                <div className="row center">
+                  <NavLink
+                    to="/user"
+                    className="grey-text text-darken-3 btn btn-small white waves-effect"
+                  >
+                    Signed in as {profile.firstName} {profile.lastName}
+                  </NavLink>
+                </div>
+              ) : (
+                <div className="row center">
+                  <NavLink
+                    to="/signin"
+                    id="download-button"
+                    className="btn btn-large waves-effect white grey-text text-darken-3"
+                    style={{ width: "8.75rem" }}
+                  >
+                    <strong style={{ fontWeight: "600" }}>Sign In</strong>
+                  </NavLink>
+                  <NavLink
+                    to="/signup"
+                    id="download-button"
+                    className="btn btn-large waves-effect white grey-text text-darken-3"
+                    style={{ marginLeft: "1rem", width: "8.75rem" }}
+                  >
+                    <strong style={{ fontWeight: "600" }}>Sign Up</strong>
+                  </NavLink>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -190,4 +203,11 @@ class LandingPage extends Component {
   }
 }
 
-export default LandingPage;
+const mapStateToProps = state => {
+  return {
+    auth: state.firebase.auth,
+    profile: state.firebase.profile
+  };
+};
+
+export default connect(mapStateToProps)(LandingPage);

@@ -7,21 +7,21 @@ const SignedOutLinks = () => {
       <ul className="left hide-on-large-only">
         <li>
           <NavLink
-            to="/create"
+            to="/help"
             className="left hide-on-large-only btn btn-floating btn-small white grey-text text-darken-3"
             style={{ margin: "auto 0", marginTop: ".8rem" }}
           >
-            <i className="fas fa-plus grey-text text-darken-3" />
+            <i className="fas fa-question grey-text text-darken-3" />
           </NavLink>
         </li>
       </ul>
       <ul className="right hide-on-med-and-down">
         <li>
           <NavLink
-            to="/create"
+            to="/help"
             className="btn btn-floating white grey-text text-darken-3"
           >
-            <i className="fas fa-plus grey-text text-darken-3" />
+            <i className="fas fa-question grey-text text-darken-3" />
           </NavLink>
         </li>
         <li>

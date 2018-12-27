@@ -21,7 +21,27 @@ const signIn = credentials => {
       })
       .catch(err => {
         dispatch({ type: "LOGIN_ERROR", err });
-        M.toast({ html: `${err}` });
+        switch (err.code) {
+          case "auth/invalid-email":
+            M.toast({ html: "Invalid email", classes: "red darken-1" });
+            break;
+          case "auth/weak-password":
+            M.toast({ html: "Weak password", classes: "red darken-1" });
+            break;
+          case "auth/wrong-password":
+            M.toast({ html: "Wrong password", classes: "red darken-1" });
+            break;
+          case "auth/user-not-found":
+            M.toast({
+              html: "Account not found",
+              classes: "red darken-1"
+            });
+            break;
+          default:
+            console.log(err);
+            M.toast({ html: `${err}`, classes: "red darken-1" });
+            break;
+        }
       });
   };
 };
@@ -53,14 +73,25 @@ export const signUp = newUser => {
       .auth()
       .createUserWithEmailAndPassword(newUser.email, newUser.password)
       .then(resp => {
-        return firestore
-          .collection("users")
-          .doc(resp.user.uid)
-          .set({
-            firstName: newUser.firstName,
-            lastName: newUser.lastName,
-            initials: newUser.firstName[0] + newUser.lastName[0]
-          });
+        if (newUser.lastName && newUser.firstName) {
+          return firestore
+            .collection("users")
+            .doc(resp.user.uid)
+            .set({
+              firstName: newUser.firstName,
+              lastName: newUser.lastName,
+              initials: newUser.firstName[0] + newUser.lastName[0]
+            });
+        } else {
+          return firestore
+            .collection("users")
+            .doc(resp.user.uid)
+            .set({
+              firstName: newUser.firstName,
+              lastName: newUser.lastName,
+              initials: newUser.firstName[0] + newUser.firstName[1]
+            });
+        }
       })
       .then(() => {
         ReactGA.event({
@@ -74,7 +105,20 @@ export const signUp = newUser => {
       })
       .catch(err => {
         dispatch({ type: "SIGNUP_ERROR", err });
-        M.toast({ html: `${err}` });
+        switch (err.code) {
+          case "auth/invalid-email":
+            M.toast({ html: "Invalid email", classes: "red darken-1" });
+            break;
+          case "auth/weak-password":
+            M.toast({ html: "Weak password", classes: "red darken-1" });
+            break;
+          default:
+            M.toast({
+              html: `${err}`,
+              classes: "red darken-1"
+            });
+            break;
+        }
       });
   };
 };
@@ -87,9 +131,14 @@ export const forgotPassword = user => {
       .sendPasswordResetEmail(user)
       .then(() => {
         dispatch({ type: "RESET_SUCCESS" });
+        M.toast({ html: "Password Reset email sent" });
       })
       .catch(err => {
         dispatch({ type: "RESET_ERROR", err });
+        M.toast({
+          html: "Password Reset email not sent",
+          classes: "red darken-1"
+        });
       });
   };
 };
@@ -111,7 +160,22 @@ export const deleteAccount = (user, creds) => {
       .then(() => {
         console.log("Deleted", userAuth.email);
         dispatch({ type: "DELETEAC_SUCCESS" });
+        M.toast({ html: "Account deleted" });
       })
-      .catch(err => dispatch({ type: "DELETEAC_ERROR", err }));
+      .catch(err => {
+        dispatch({ type: "DELETEAC_ERROR", err });
+        switch (err.code) {
+          case "auth/wrong-password":
+            M.toast({
+              html: "Wrong password",
+              classes: "red darken-1"
+            });
+            break;
+          default:
+            console.log(err);
+            M.toast({ html: `${err}`, classes: "red darken-1" });
+            break;
+        }
+      });
   };
 };

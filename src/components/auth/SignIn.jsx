@@ -19,9 +19,8 @@ class SignIn extends Component {
     ) {
       const user = document.getElementById("email").value;
       this.props.forgotPassword(user);
-      M.toast({ html: "Password Reset email sent" });
     } else {
-      M.toast({ html: "Enter an email address" });
+      M.toast({ html: "Enter an email address", classes: "red darken-1" });
     }
   };
   handleSubmit = e => {
@@ -36,6 +35,7 @@ class SignIn extends Component {
   render() {
     ReactGA.pageview("/signin");
     const { authError, auth } = this.props;
+    if (authError) console.log(authError);
     if (auth.uid) return <Redirect to="/" />;
     return (
       <div className="container section">
@@ -83,9 +83,9 @@ class SignIn extends Component {
             >
               Not Registered?
             </Link>
-            <div className="red-text center">
+            {/* <div className="red-text center">
               {authError ? <p>&nbsp;&nbsp;{authError}</p> : null}
-            </div>
+            </div> */}
           </div>
         </form>
       </div>

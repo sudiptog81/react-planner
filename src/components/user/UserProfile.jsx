@@ -14,7 +14,6 @@ class UserProfile extends Component {
   handleResetPassword = () => {
     const user = this.props.auth.email;
     this.props.forgotPassword(user);
-    M.toast({ html: "Password Reset email sent" });
   };
   handleDeleteAccount = () => {
     const user = this.props.auth;
@@ -31,6 +30,7 @@ class UserProfile extends Component {
   };
   render() {
     const { auth, profile, authError } = this.props;
+    if (authError) console.log(authError);
     if (!auth.uid) return <Redirect to="/signin" />;
     return (
       <div className="container center section">
@@ -46,33 +46,40 @@ class UserProfile extends Component {
                 position: "relative"
               }}
             >
-              <span
+              <i
+                className="fas fa-user"
+                style={{ fontSize: "4.5rem", marginTop: "1rem" }}
+              />
+              {/* <span
                 className="user-circle"
                 style={{
-                  fontFamily: "cursive",
-                  fontSize: "5rem",
+                  fontFamily: "Pacifico, cursive",
+                  fontSize: "4rem",
                   position: "absolute"
                 }}
               >
                 {profile.initials}
-              </span>
+              </span> */}
             </button>
           </div>
         </div>
         <div className="row">
           <div className="col s12">
-            <h3
+            <h4
               className="grey-text text-darken-3"
               style={{ margin: "1rem 0" }}
             >
               {profile.firstName} {profile.lastName}
-            </h3>
-            <h5 className="grey-text" style={{ wordWrap: "break-word" }}>
+            </h4>
+            <h6
+              className="grey-text"
+              style={{ wordWrap: "break-word", fontSize: "1.3rem" }}
+            >
               {auth.email}
-            </h5>
+            </h6>
           </div>
         </div>
-        <div className="row" style={{ marginTop: "3rem" }}>
+        <div className="row" style={{ marginTop: "2rem" }}>
           <div className="col s12 m6 center" style={{ marginTop: "1rem" }}>
             <button
               className="btn btn-large waves-effect waves-light indigo darken-2 "
@@ -88,9 +95,9 @@ class UserProfile extends Component {
             >
               Delete Account
             </button>
-            {authError ? (
+            {/* {authError ? (
               <p className="center red-text text-darken-1">{authError}</p>
-            ) : null}
+            ) : null} */}
             <div id="modal" className="modal" style={{ marginTop: "5em" }}>
               <div className="modal-content">
                 <h4>ARE YOU SURE?</h4>

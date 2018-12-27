@@ -24,6 +24,7 @@ class SignUp extends Component {
   render() {
     ReactGA.pageview("/signup");
     const { auth, authError } = this.props;
+    if (authError) console.log(authError);
     if (auth.uid) return <Redirect to="/" />;
     return (
       <div className="container section">
@@ -84,9 +85,9 @@ class SignUp extends Component {
             >
               Already Registered?
             </Link>
-            <div className="red-text center">
+            {/* <div className="red-text center">
               {authError ? <p>&nbsp;&nbsp;{authError}</p> : null}
-            </div>
+            </div> */}
           </div>
         </form>
       </div>

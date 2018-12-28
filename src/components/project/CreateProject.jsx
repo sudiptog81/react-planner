@@ -21,8 +21,10 @@ class CreateProject extends Component {
       [e.target.name]: e.target.value
     });
   };
-  render(props) {
+  componentDidMount() {
     ReactGA.pageview("/create");
+  }
+  render(props) {
     const { auth } = this.props;
     if (!auth.uid) return <Redirect to="/signin" />;
     return (

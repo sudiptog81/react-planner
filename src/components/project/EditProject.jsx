@@ -26,10 +26,10 @@ class EditProject extends Component {
   };
   componentDidMount() {
     M.updateTextFields();
+    ReactGA.pageview(`/edit/${this.props.match.params.id}`);
   }
   render(props) {
     const { project, auth } = this.props;
-    ReactGA.pageview(`/edit/${this.props.match.params.id}`);
     if (!auth.uid) return <Redirect to="/signin" />;
     if (project) {
       if (!(auth.uid === project.authorId)) return <Redirect to="/dashboard" />;

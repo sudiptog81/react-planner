@@ -8,9 +8,9 @@ class LandingPage extends Component {
   componentDidMount() {
     const elems = document.querySelectorAll(".parallax");
     M.Parallax.init(elems);
+    ReactGA.pageview("/");
   }
   render() {
-    ReactGA.pageview("/");
     const { auth, profile } = this.props;
     return (
       <React.Fragment>

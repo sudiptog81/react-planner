@@ -3,12 +3,14 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { forgotPassword, deleteAccount } from "../../store/actions/authActions";
 import M from "materialize-css";
+import ReactGA from "react-ga";
 
 class UserProfile extends Component {
   state = {};
   componentDidMount() {
     var elems = document.querySelectorAll(".modal");
     M.Modal.init(elems, null);
+    ReactGA.pageview(`/user`);
   }
   handleResetPassword = () => {
     const user = this.props.auth.email;

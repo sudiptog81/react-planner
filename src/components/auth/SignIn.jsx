@@ -32,8 +32,10 @@ class SignIn extends Component {
       [e.target.name]: e.target.value
     });
   };
-  render() {
+  componentDidMount() {
     ReactGA.pageview("/signin");
+  }
+  render() {
     const { authError, auth } = this.props;
     if (authError) console.log(authError);
     if (auth.uid) return <Redirect to="/dashboard" />;

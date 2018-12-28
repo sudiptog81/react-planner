@@ -3,7 +3,6 @@ import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { signUp } from "../../store/actions/authActions";
 import ReactGA from "react-ga";
-// import M from "materialize-css";
 
 class SignUp extends Component {
   state = {
@@ -21,8 +20,10 @@ class SignUp extends Component {
       [e.target.name]: e.target.value
     });
   };
-  render() {
+  componentDidMount() {
     ReactGA.pageview("/signup");
+  }
+  render() {
     const { auth, authError } = this.props;
     if (authError) console.log(authError);
     if (auth.uid) return <Redirect to="/dashboard" />;
